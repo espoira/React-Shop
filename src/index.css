@@ -785,10 +785,20 @@ ul li span {
   text-transform: uppercase;
   color: #111111;
   border-bottom: 1px dashed rgba(63, 78, 101, 0.3);
+  cursor: pointer;
+}
+
+.filters p:hover {
+  color: darkmagenta;
 }
 
 .filters p:first-child {
   border: none;
+  cursor: auto;
+}
+
+.filters p:first-child:hover {
+  color: #111111;
 }
 
 .filters span {
@@ -799,6 +809,21 @@ ul li span {
   line-height: 150%;
   color: #111111;
 }
+
+label {
+  display: block;
+  color: #3F4E65;
+}
+
+label input {
+  top: 24px;
+  position: relative;
+}
+
+label span {
+  padding-left: 10px;
+}
+
 
 .product-info {
   padding: 50px 10px 60px 277px;

@@ -130,7 +130,7 @@ class App extends Component {
 
     showProduct = (id) => {
         products.map((item)=>{
-            if (item.id == id) {
+            if (item.id === id) {
                 this.setState ({goodId: id});
             }
         });
@@ -142,12 +142,13 @@ class App extends Component {
         this.setState ({flag: false});
         this.setState ({flagCart: false});
         this.setState ({flagProduct: false});
+        this.setState ({flagFilter: false});
     };
 
 
     render() {
 
-        const {flag, typeName, categories, order, amount, pricesSum, goodId, flagCart, flagProduct} = this.state;
+        const {flag, typeName, categories, order, amount, pricesSum, goodId, target, flagCart, flagProduct} = this.state;
 
         let content;
 
@@ -176,7 +177,17 @@ class App extends Component {
                 </>
             ) : (
 
-                    <Shop str={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} goodId={goodId} showFilter={this.showFilter}/>
+                    <Shop
+                        str={typeName}
+                        flag={flag}
+
+                        goodId={goodId}
+                        flagProduct={flagProduct}
+                        showProduct={this.showProduct}
+
+                        addToCart={this.addToCart}
+                        goBack={this.goBack}
+                    />
 
             )
 

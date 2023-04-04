@@ -1,15 +1,17 @@
 import React from 'react';
-
+import { TypeFilter } from './TypeFilter';
 
 function ProductsList(props) {
     const {
         goods = [],
+        category,
+        target,
         addToCart = Function.prototype,
         goBack = Function.prototype,
         showFilter = Function.prototype,
         showProduct = Function.prototype,
+        flagFilter,
         flag,
-        category
     } = props;
 
     if (!goods.length) {
@@ -18,6 +20,7 @@ function ProductsList(props) {
 
     let count = 0;
     let types = [];
+    let producers = [];
 
     let shopContent = flag ? (
 
@@ -39,8 +42,12 @@ function ProductsList(props) {
                         types.push(item.target);
 
                         return (
-                            <span className="types-filter" onClick={showFilter}>
+                            <span
+                                className="types-filter"
+                                onClick={() => showFilter(item.target)}
+                            >
                                 {item.target}
+
                             </span>
                         )
                     }
@@ -54,14 +61,33 @@ function ProductsList(props) {
                 <span>Производитель</span>
                 <input type="text" placeholder="Поиск..." />
 
+                {goods.map((item) => {
+                    if (item.category === category) {
 
+                        if (!producers.includes(item.company)) {
+                            producers.push(item.company);
+
+                            return (
+                                <label>
+                                    <input type="checkbox" />
+                                    <span>{item.company}</span>
+                                </label>
+                            )
+                        }
+
+                    }
+                })}
 
                 {types.map((item) => {
-                    console.log(item);
-                    return (<p>{item}</p>)
+
+                    return (
+                        <p onClick={() => showFilter(item)}>{item}</p>
+                    )
+
                 })}
 
             </div>
+
         </div>
     );
 
@@ -71,9 +97,8 @@ function ProductsList(props) {
             {shopContent}
 
             {goods.map((item) => {
-                if (!flag && item.category === category) {
+                if (!flag && item.category === category && !flagFilter) {
 
-                    types.push(item.target);
                     return (
 
                         <div className="products-list">
@@ -90,7 +115,14 @@ function ProductsList(props) {
 
                 }
 
+                if (flagFilter && item.target === target && item.category === category) {
+
+                    return (<ProductsItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />)
+
+                }
+
             })}
+
         </div>
     );
 }
@@ -109,7 +141,6 @@ function ProductsItem(props) {
         volume,
         size,
         description,
-        target,
         addToCart = Function.prototype,
         showProduct = Function.prototype,
         flag,

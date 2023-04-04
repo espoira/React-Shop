@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/React-Shop/static/css/main.22a9c396.chunk.css",
-    "main.js": "/React-Shop/static/js/main.ffb2a5b1.chunk.js",
-    "main.js.map": "/React-Shop/static/js/main.ffb2a5b1.chunk.js.map",
+    "main.css": "/React-Shop/static/css/main.e6021f1f.chunk.css",
+    "main.js": "/React-Shop/static/js/main.e8009c4c.chunk.js",
+    "main.js.map": "/React-Shop/static/js/main.e8009c4c.chunk.js.map",
     "runtime-main.js": "/React-Shop/static/js/runtime-main.5705e413.js",
     "runtime-main.js.map": "/React-Shop/static/js/runtime-main.5705e413.js.map",
     "static/js/2.e5c9201f.chunk.js": "/React-Shop/static/js/2.e5c9201f.chunk.js",
     "static/js/2.e5c9201f.chunk.js.map": "/React-Shop/static/js/2.e5c9201f.chunk.js.map",
     "index.html": "/React-Shop/index.html",
-    "static/css/main.22a9c396.chunk.css.map": "/React-Shop/static/css/main.22a9c396.chunk.css.map",
+    "static/css/main.e6021f1f.chunk.css.map": "/React-Shop/static/css/main.e6021f1f.chunk.css.map",
     "static/js/2.e5c9201f.chunk.js.LICENSE.txt": "/React-Shop/static/js/2.e5c9201f.chunk.js.LICENSE.txt",
     "static/media/index.css": "/React-Shop/static/media/image_main.9812bd92.png"
   },
   "entrypoints": [
     "static/js/runtime-main.5705e413.js",
     "static/js/2.e5c9201f.chunk.js",
-    "static/css/main.22a9c396.chunk.css",
-    "static/js/main.ffb2a5b1.chunk.js"
+    "static/css/main.e6021f1f.chunk.css",
+    "static/js/main.e8009c4c.chunk.js"
   ]
 }

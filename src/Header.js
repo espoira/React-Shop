@@ -20,7 +20,7 @@ function Header() {
             </nav>
 
             <div id="info">
-                 <img src="pictures/logo_sultan.svg" />
+                 <img src={`${process.env.PUBLIC_URL}/pictures/logo_sultan.svg`} />
                  <a className="button" href="#">
                      Каталог<b className="material-icons">border_all</b>
                  </a>
@@ -30,12 +30,13 @@ function Header() {
                      <i>время работы: 9:00-20:00</i>
                      <br /> <i> Заказать звонок </i>
                  </p>
-                 <img id="img-call" src="pictures/help_call.png" />
-                 <a className="button" id="btn-list" href="#">Прайс-лист
+                 <img id="img-call" src={`${process.env.PUBLIC_URL}/pictures/help_call.png`} />
+                 <p id="call"> </p>
+                 <a className="button" href="#">Прайс-лист
                      <b className="material-icons">vertical_align_bottom</b>
                  </a>
-                 <i></i>
             </div>
+
         </header>
     );
 }

@@ -69,11 +69,15 @@ function CartItem(props) {
 
         <div className="product-item">
             <div className="product-picture">
-                <img src={productImage}/>
+                <img src={process.env.PUBLIC_URL + productImage}/>
             </div>
-            <h4>{name}</h4>
-            <p>{briefDescript}</p>
 
+            <div className="info">
+                <h4>{name}</h4>
+                <p>{briefDescript}</p>
+            </div>
+
+            <div>
             <div className="button-del" onClick={() => removeFromCart(id)}></div>
             <span className="price">{valutePrice * quantity} ₸</span>
             <span>
@@ -81,6 +85,7 @@ function CartItem(props) {
                 {quantity}
                 <b onClick={() => incQuantity(id)}>+</b>
             </span>
+            </div>
         </div>
 
     );

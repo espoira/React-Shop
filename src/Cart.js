@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Cart(props) {
-    const { quantity = 0, handleCartShow = Function.prototype } = props;
+    const { quantity = 0, pricesSum, handleCartShow = Function.prototype } = props;
     return (
         <div id='cart'>
             <i className="cart-icon" onClick={handleCartShow}></i>
@@ -9,7 +9,7 @@ function Cart(props) {
                 <span className='cart-quantity'>{quantity}</span>
             ) : null}
             <span>Корзина<br/>
-		      <b className="price">Цена</b>
+		      <b className="price">{pricesSum} ₸</b>
 		    </span>
 
         </div>

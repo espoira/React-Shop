@@ -12,6 +12,7 @@ import { Banner } from './Banner';
 import { Actions } from './Actions';
 import { Brands } from "./Brands";
 import { Address } from './Address';
+import products from "./products";
 
 
 class App extends Component {
@@ -28,9 +29,11 @@ class App extends Component {
                 { id: 5, name: 'Посуда' }
             ],
             order: [],
+            amount: 0,
             flagCart: false,
             flagProduct: false,
-            amount: 0,
+            pricesSum: 0,
+            goodId: 0,
         };
         this.addToCart = this.addToCart.bind(this);
     };
@@ -60,8 +63,8 @@ class App extends Component {
             });
             this.setState({order:newOrder});
         }
-        this.setState({alertName:item.name});
         this.setState({amount:this.state.amount + 1});
+        this.setState({pricesSum:this.state.pricesSum + item.price * 6});
     };
 
 
@@ -71,6 +74,7 @@ class App extends Component {
         //eslint-disable-next-line
         this.state.order.map ((orderItem) => {
             if (orderItem.id === itemId) {
+                this.setState({pricesSum:this.state.pricesSum - orderItem.quantity * orderItem.price * 6});
                 return this.setState({amount:this.state.amount - orderItem.quantity});
             }
         });
@@ -79,6 +83,7 @@ class App extends Component {
     incQuantity = (itemId) => {
         const newOrder = this.state.order.map ((orderItem) => {
             if (orderItem.id === itemId) {
+                this.setState({pricesSum:this.state.pricesSum + orderItem.price * 6});
                 return {
                     ...orderItem,
                     quantity: orderItem.quantity + 1,
@@ -95,7 +100,13 @@ class App extends Component {
         const newOrder = this.state.order.map ((orderItem) => {
             if (orderItem.id === itemId) {
                 const newQuantity = orderItem.quantity - 1;
-                (newQuantity >= 0) ? this.setState({amount:this.state.amount - 1}) : this.setState({amount:this.state.amount});
+                if (newQuantity >= 0) {
+                    this.setState({amount: this.state.amount - 1});
+                    this.setState({pricesSum: this.state.pricesSum - orderItem.price * 6});
+                } else {
+                    this.setState({amount:this.state.amount});
+                    this.setState({pricesSum: this.state.pricesSum});
+                }
                 return {
                     ...orderItem,
                     quantity: newQuantity >= 0 ? newQuantity : 0,
@@ -117,8 +128,14 @@ class App extends Component {
         this.setState ({typeName: this.state.categories[id-1].name});
     };
 
-    showProduct = () => {
+    showProduct = (id) => {
+        products.map((item)=>{
+            if (item.id == id) {
+                this.setState ({goodId: id});
+            }
+        });
         this.setState ({flagProduct: true});
+        this.setState ({flag: true});
     };
 
     goBack = () => {
@@ -130,7 +147,7 @@ class App extends Component {
 
     render() {
 
-        const {flag, typeName, categories, order, amount, flagCart, flagProduct} = this.state;
+        const {flag, typeName, categories, order, amount, pricesSum, goodId, flagCart, flagProduct} = this.state;
 
         let content;
 
@@ -150,7 +167,7 @@ class App extends Component {
             content = (!flag) ? (
                 <>
                     <Banner/>
-                    <Shop str={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct}/>
+                    <Shop str={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} goodId={goodId}/>
                     <Categories categories={categories} showList={this.showList}/>
 
                     <Actions/>
@@ -159,7 +176,7 @@ class App extends Component {
                 </>
             ) : (
 
-                <Shop str={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} showFilter={this.showFilter}/>
+                    <Shop str={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} goodId={goodId} showFilter={this.showFilter}/>
 
             )
 
@@ -170,7 +187,7 @@ class App extends Component {
             <>
                 <Header/>
 
-                <Cart quantity={amount} handleCartShow={this.handleCartShow}/>
+                <Cart quantity={amount} pricesSum={pricesSum} handleCartShow={this.handleCartShow}/>
 
 
                 {content}

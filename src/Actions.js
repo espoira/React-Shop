@@ -13,13 +13,10 @@ function Actions() {
 
             </div>
 
-            <img src="/images/image_action.jpg"/>
+            <img src = {`${process.env.PUBLIC_URL}/images/image_action.jpg`} />
 
             <div className="pagination">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span> <span></span> <span></span> <span></span>
             </div>
 
         </section>

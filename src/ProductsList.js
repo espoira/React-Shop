@@ -1,5 +1,4 @@
 import React from 'react';
-import {Shop} from "./Shop";
 
 
 function ProductsList(props) {
@@ -126,7 +125,7 @@ function ProductsItem(props) {
             {flag ? (<span className="popular">ПОПУЛЯРНОЕ</span>) : <> </>}
 
             <div className="product-picture">
-                <img src={productImage} alt={name} />
+                <img src={process.env.PUBLIC_URL + productImage} alt={name} />
             </div>
 
             <div className='card-action'>
@@ -147,7 +146,7 @@ function ProductsItem(props) {
             </div>
 
             <div className='card-content'>
-                <h5 onClick={showProduct}> {name} </h5>
+                <h5 onClick={() => showProduct(id)}> {name} </h5>
                 <p><span>Штрихкод: </span>{id * 3* Math.pow(10,4) + 200 + id + Math.pow(10,6)}</p>
                 <p><span>Производитель: </span>{company}</p>
                 <p><span>Брэнд: </span>{brand}</p>

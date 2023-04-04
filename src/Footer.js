@@ -2,7 +2,9 @@ function Footer() {
     return (
         <footer>
             <ul>
-                <li><img src="pictures/logo_white.svg"/></li>
+                <li>
+                    <img src={`${process.env.PUBLIC_URL}/pictures/logo_white.svg`} />
+                </li>
                 <li>
                   <p>
                     Компания «Султан» — снабжаем<br /> розничные магазины товарами<br />
@@ -39,8 +41,8 @@ function Footer() {
                 </li>
                 <li>Связь в мессенджерах:</li>
                 <li>
-                    <img src="pictures/whatsApp.png" />
-                    <img src="pictures/telegram.png" />
+                    <img src={`${process.env.PUBLIC_URL}/pictures/whatsApp.png`} />
+                    <img src={`${process.env.PUBLIC_URL}/pictures/telegram.png`} />
                 </li>
             </ul>
 
@@ -54,8 +56,8 @@ function Footer() {
                     <span><br />На связи в любое время<br /></span>
                 </li>
                 <li>
-                    <img src="pictures/Visa.png" />
-                    <img src="pictures/masterCard.png" />
+                    <img src={`${process.env.PUBLIC_URL}/pictures/Visa.png`} />
+                    <img src={`${process.env.PUBLIC_URL}/pictures/MasterCard.png`} />
                 </li>
             </ul>
         </footer>

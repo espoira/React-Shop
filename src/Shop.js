@@ -24,7 +24,7 @@ class Shop extends React.Component {
 
     render() {
         const {category, popular} = this.state;
-        const {flagProduct, addToCart = Function.prototype, goBack = Function.prototype, showProduct = Function.prototype} = this.props;
+        const {flagProduct, goodId, addToCart = Function.prototype, goBack = Function.prototype, showProduct = Function.prototype} = this.props;
 
         return (
             <>
@@ -32,13 +32,13 @@ class Shop extends React.Component {
 
                     <section id="goods">
 
-                        <ProductsList flag={popular} category={category} goods={products} addToCart={addToCart} goBack={goBack} showProduct={showProduct} />
+                            <ProductsList flag={popular} category={category} goods={products} addToCart={addToCart} goBack={goBack} showProduct={showProduct} />
 
                     </section>
 
                 ) : (
 
-                    <ProductInfo goods={products} addToCart={addToCart} goBack={goBack}/>
+                    <ProductInfo goods={products} goodId={goodId} addToCart={addToCart} goBack={goBack}/>
 
                 )}
             </>

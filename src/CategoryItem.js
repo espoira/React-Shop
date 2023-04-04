@@ -11,7 +11,7 @@ function CategoryItem(props) {
         <div className='category' onClick={() => showList(id)}>
 
             <div>
-                <img src={categoryImage} alt={name} />
+                <img src={process.env.PUBLIC_URL + categoryImage} alt={name} />
             </div>
 
             <span> {name} </span>

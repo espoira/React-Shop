@@ -14,15 +14,21 @@ class Shop extends React.Component {
             popular: true,
             flagFilter: false,
             target: '',
+            company: '',
+            filter: false,
         };
     }
 
 
-    showFilter = (type) => {
+    showFilter = (item) => {
         this.setState({flagFilter: true});
-        this.setState ({target: type});
+        this.setState ({target: item.target});
     };
 
+    showCompany = (item) => {
+        this.setState({filter: !this.state.filter});
+        this.setState({company: item.company});
+    };
 
     componentDidMount() {
       this.setState ({category: this.props.str});
@@ -31,7 +37,7 @@ class Shop extends React.Component {
 
 
     render() {
-        const {category, popular, flagFilter, target} = this.state;
+        const {category, popular, flagFilter, target, company, filter} = this.state;
         const {flagProduct, goodId, addToCart = Function.prototype, goBack = Function.prototype, showProduct = Function.prototype} = this.props;
         console.log(target);
         return (
@@ -49,9 +55,13 @@ class Shop extends React.Component {
                             flagFilter={flagFilter}
                             showFilter={this.showFilter}
 
+                            company={company}
+                            filter={filter}
+                            showCompany={this.showCompany}
+
+                            showProduct={showProduct}
                             addToCart={addToCart}
                             goBack={goBack}
-                            showProduct={showProduct}
                         />
 
                     </section>

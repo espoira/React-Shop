@@ -811,6 +811,7 @@ ul li span {
 }
 
 label {
+  margin-bottom: -20px;
   display: block;
   color: #3F4E65;
 }
@@ -822,6 +823,10 @@ label input {
 
 label span {
   padding-left: 10px;
+}
+
+.filters label:last-child {
+  padding-bottom: 40px;
 }
 
 

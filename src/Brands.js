@@ -1,3 +1,5 @@
+import React from "react";
+
 function Brands() {
 
     let arr = ['01','02','03','04','05','06','07','08','09','10'];
@@ -10,7 +12,7 @@ function Brands() {
 
             {arr.map((item) => {
 
-                return (<img src = {`${process.env.PUBLIC_URL}/images/brand-${item}.png`} />);
+                return (<img key={item} src = {`${process.env.PUBLIC_URL}/images/brand-${item}.png`} />);
 
             })}
 

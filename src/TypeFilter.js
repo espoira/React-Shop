@@ -3,7 +3,7 @@ import { CompanyFilter } from './CompanyFilter';
 
 function TypeFilter (props) {
     const {
-        goods = [],
+        goods,
         category,
         showFilter = Function.prototype,
         showCompany = Function.prototype,
@@ -21,9 +21,8 @@ function TypeFilter (props) {
                         types.push(item.target);
 
                         return (
-                            <span
-                                className="types-filter"
-                                onClick={() => showFilter(item)}
+                            <span key={item.id} className="types-filter"
+                                  onClick={() => showFilter(item.target)}
                             >
                                 {item.target}
 
@@ -43,7 +42,7 @@ function TypeFilter (props) {
                 {types.map((item) => {
 
                     return (
-                        <p onClick={() => showFilter(item)}>{item}</p>
+                        <p key={item} onClick={() => showFilter(item)}>{item}</p>
                     )
 
                 })}

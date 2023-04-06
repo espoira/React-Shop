@@ -793,6 +793,7 @@ ul li span {
 }
 
 .filters p:first-child {
+  font-weight: 600;
   border: none;
   cursor: auto;
 }
@@ -829,6 +830,18 @@ label span {
   padding-bottom: 40px;
 }
 
+#sorting {
+    top: -70px;
+    left: -100px;
+    position: relative;
+    cursor: pointer;
+}
+
+select {
+    top: -70px;
+    left: -70px;
+    position: relative;
+}
 
 .product-info {
   padding: 50px 10px 60px 277px;

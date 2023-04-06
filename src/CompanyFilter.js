@@ -1,9 +1,8 @@
 import React from 'react';
 
-
 function CompanyFilter (props) {
     const {
-        goods = [],
+        goods,
         category,
         showCompany = Function.prototype,
     } = props;
@@ -13,7 +12,7 @@ function CompanyFilter (props) {
 
     return (
         <>
-            <span>Производитель</span>
+            <span><b>Производитель</b></span>
             <input type="text" placeholder="Поиск..." />
 
             {goods.map((item) => {
@@ -23,7 +22,7 @@ function CompanyFilter (props) {
                         producers.push(item.company);
 
                         return (
-                            <label>
+                            <label key={item.id}>
                                 <input type="checkbox" onChange={() => showCompany(item)} />
                                 <span>{item.company}</span>
                             </label>

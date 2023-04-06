@@ -16,13 +16,18 @@ class Shop extends React.Component {
             target: '',
             company: '',
             filter: false,
+            sortingFlag: false,
+            sortedNames: [],
         };
     }
 
+    showSorted = () => {
+        this.setState({sortingFlag: true});
+    };
 
-    showFilter = (item) => {
+    showFilter = (type) => {
         this.setState({flagFilter: true});
-        this.setState ({target: item.target});
+        this.setState ({target: type});
     };
 
     showCompany = (item) => {
@@ -37,9 +42,9 @@ class Shop extends React.Component {
 
 
     render() {
-        const {category, popular, flagFilter, target, company, filter} = this.state;
+        const {category, popular, flagFilter, target, company, filter, sortingFlag, sortedNames} = this.state;
         const {flagProduct, goodId, addToCart = Function.prototype, goBack = Function.prototype, showProduct = Function.prototype} = this.props;
-        console.log(target);
+
         return (
             <>
                 {!flagProduct ? (
@@ -58,6 +63,10 @@ class Shop extends React.Component {
                             company={company}
                             filter={filter}
                             showCompany={this.showCompany}
+
+                            sortedNames={sortedNames}
+                            sortingFlag={sortingFlag}
+                            showSorted={this.showSorted}
 
                             showProduct={showProduct}
                             addToCart={addToCart}

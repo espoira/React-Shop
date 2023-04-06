@@ -1,18 +1,22 @@
 import React from 'react';
 import { TypeFilter } from './TypeFilter';
 import { ProductItem } from './ProductItem';
+import {GoodsSorting} from "./GoodsSorting";
 
 function ProductsList(props) {
     const {
-        goods = [],
+        goods,
         category,
         target,
         company,
+        sortedNames,
         addToCart = Function.prototype,
         goBack = Function.prototype,
         showFilter = Function.prototype,
         showCompany = Function.prototype,
         showProduct = Function.prototype,
+        showSorted = Function.prototype,
+        sortingFlag,
         flagFilter,
         filter,
         flag,
@@ -36,7 +40,37 @@ function ProductsList(props) {
 
             <h3>{category}</h3>
 
+
             <TypeFilter goods={goods} category={category} showFilter={showFilter} showCompany={showCompany} />
+
+
+            <span id="sorting" onClick={() => showSorted()}><b>Сортировка:</b></span>
+
+            <select>
+                <option onChange={() => showSorted()} value="by-name">По названию</option>
+                <option onChange={() => showSorted()} value="by-name-reverse">В обратном порядке</option>
+            </select>
+
+            {sortingFlag && !flagFilter && !filter ? (
+
+                sortedNames.sort().map((goodName) => {
+
+                    return goods.map((good) => {
+                        if (good.name === goodName) {
+                            return (
+
+                                <ProductItem key={good.id} {...good} addToCart={addToCart} showProduct={showProduct}/>
+
+                            )
+                        }
+                    })
+
+                })
+
+            ) : (
+                null
+            )}
+
 
         </div>
     );
@@ -48,11 +82,15 @@ function ProductsList(props) {
 
 
             {goods.map((item) => {
-                if (!flag && item.category === category && !flagFilter && !filter) {
+                if (!flag && item.category === category && !sortingFlag && !flagFilter && !filter) {
+
+                    if (!sortedNames.includes(item.name)) {
+                        sortedNames.push(item.name);
+                    }
 
                     return (
 
-                        <div className="products-list">
+                        <div key={item.id} className="products-list">
                             <ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />
                         </div>
 
@@ -60,7 +98,7 @@ function ProductsList(props) {
 
                 }
 
-                if (flag && item.id % 5 === 0) {
+                if (flag && item.id % 7 === 0) {
 
                     return (<ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />)
 

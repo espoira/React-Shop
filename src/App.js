@@ -129,12 +129,14 @@ class App extends Component {
     };
 
     showProduct = (id) => {
-        products.map((item)=>{
-            if (item.id === id) {
-                this.setState ({goodId: id});
-            }
-        });
+        this.setState ({goodId: id});
         this.setState ({flagProduct: true});
+        this.setState ({flag: true});
+    };
+
+    showCategory = (title) => {
+        this.setState ({typeName: title});
+        this.setState ({flagProduct: false});
         this.setState ({flag: true});
     };
 
@@ -168,7 +170,7 @@ class App extends Component {
             content = (!flag) ? (
                 <>
                     <Banner/>
-                    <Shop str={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} goodId={goodId}/>
+                    <Shop title={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} goodId={goodId}/>
                     <Categories categories={categories} showList={this.showList}/>
 
                     <Actions/>
@@ -178,13 +180,14 @@ class App extends Component {
             ) : (
 
                     <Shop
-                        str={typeName}
+                        title={typeName}
                         flag={flag}
 
                         goodId={goodId}
                         flagProduct={flagProduct}
                         showProduct={this.showProduct}
 
+                        showCategory={this.showCategory}
                         addToCart={this.addToCart}
                         goBack={this.goBack}
                     />

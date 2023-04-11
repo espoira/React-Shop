@@ -18,6 +18,7 @@ class Shop extends React.Component {
             filter: false,
             sortingFlag: false,
             sortedNames: [],
+            pageNumber: 1,
         };
     }
 
@@ -35,15 +36,24 @@ class Shop extends React.Component {
         this.setState({company: item.company});
     };
 
+    clearFilters = () => {
+        this.setState({flagFilter: false});
+        this.setState ({filter: false});
+        this.setState({sortingFlag: false});
+    };
+
+
     componentDidMount() {
-      this.setState ({category: this.props.str});
-      this.setState ({popular: !this.props.flag});
+        window.scrollTo(0, 72);
+        this.setState ({category: this.props.title});
+        this.setState ({popular: !this.props.flag});
     };
 
 
     render() {
-        const {category, popular, flagFilter, target, company, filter, sortingFlag, sortedNames} = this.state;
-        const {flagProduct, goodId, addToCart = Function.prototype, goBack = Function.prototype, showProduct = Function.prototype} = this.props;
+        const {category, popular, flagFilter, target, company, filter, sortingFlag, sortedNames, pageNumber} = this.state;
+        const {flagProduct, goodId, addToCart = Function.prototype, goBack = Function.prototype,
+               showProduct = Function.prototype, showCategory = Function.prototype} = this.props;
 
         return (
             <>
@@ -55,6 +65,7 @@ class Shop extends React.Component {
                             flag={popular}
                             category={category}
                             goods={products}
+                            page={pageNumber}
 
                             target={target}
                             flagFilter={flagFilter}
@@ -69,6 +80,7 @@ class Shop extends React.Component {
                             showSorted={this.showSorted}
 
                             showProduct={showProduct}
+                            clearFilters={this.clearFilters}
                             addToCart={addToCart}
                             goBack={goBack}
                         />
@@ -77,7 +89,7 @@ class Shop extends React.Component {
 
                 ) : (
 
-                    <ProductInfo goods={products} goodId={goodId} addToCart={addToCart} goBack={goBack}/>
+                    <ProductInfo goods={products} goodId={goodId} showCategory={showCategory} addToCart={addToCart} goBack={goBack}/>
 
                 )}
             </>

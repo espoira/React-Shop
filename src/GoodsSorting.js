@@ -16,12 +16,16 @@ function GoodsSorting (props) {
 
     return (
         <>
+            <span id="sorting" onClick={() => showSorted()}><b>Сортировка:</b></span>
 
-            <span onClick={() => showSorted()}><b>Сортировка:</b></span>
+            <select>
+                <option onChange={() => showSorted()} value="by-name">По названию (А - Я)</option>
+                <option onChange={() => showSorted()} value="by-name-reverse">По названию (Я - А)</option>
+            </select>
 
             {sortingFlag && !flagFilter && !filter ? (
 
-                sortedNames.sort().reverse().map((goodName) => {
+                sortedNames.sort().map((goodName) => {
 
                     return goods.map((good) => {
                         if (good.name === goodName) {

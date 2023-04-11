@@ -757,11 +757,10 @@ ul li span {
 .types-filter {
   margin: 5px 5px 30px 5px;
   padding: 18px 10px;
-  display: inline-block;
+  float: left;
   font-size: 14px;
   line-height: 17px;
   color: #3F4E65;
-  text-align: center;
   background: #FFFFFF;
   box-shadow: 0 15px 70px -11px rgba(43, 28, 1, 0.04);
   border-radius: 10px;
@@ -774,6 +773,7 @@ ul li span {
 
 .filters {
   margin-top: 75px;
+  clear: both;
 }
 
 .filters p {
@@ -831,16 +831,16 @@ label span {
 }
 
 #sorting {
-    top: -70px;
-    left: -100px;
-    position: relative;
+    margin-top: -135px;
+    margin-right: 260px;
+    float: right;
     cursor: pointer;
 }
 
 select {
-    top: -70px;
-    left: -70px;
-    position: relative;
+    margin-top: -133px;
+    margin-right: 80px;
+    float: right;
 }
 
 .product-info {

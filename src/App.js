@@ -12,7 +12,7 @@ import { Banner } from './Banner';
 import { Actions } from './Actions';
 import { Brands } from "./Brands";
 import { Address } from './Address';
-import products from "./products";
+
 
 
 class App extends Component {
@@ -169,13 +169,16 @@ class App extends Component {
 
             content = (!flag) ? (
                 <>
-                    <Banner/>
-                    <Shop title={typeName} flag={flag} flagProduct={flagProduct} addToCart={this.addToCart} goBack={this.goBack} showProduct={this.showProduct} goodId={goodId}/>
-                    <Categories categories={categories} showList={this.showList}/>
+                    <Banner />
 
-                    <Actions/>
-                    <Brands/>
-                    <Address/>
+                    <Shop title={typeName} flag={flag} goodId={goodId} flagProduct={flagProduct}
+                          showProduct={this.showProduct} addToCart={this.addToCart} goBack={this.goBack} />
+
+                    <Categories categories={categories} showList={this.showList} />
+
+                    <Actions />
+                    <Brands />
+                    <Address />
                 </>
             ) : (
 
@@ -199,15 +202,15 @@ class App extends Component {
 
         return (
             <>
-                <Header/>
+                <Header />
 
-                <Cart quantity={amount} pricesSum={pricesSum} handleCartShow={this.handleCartShow}/>
+                <Cart quantity={amount} pricesSum={pricesSum} handleCartShow={this.handleCartShow} />
 
 
                 {content}
 
 
-                <Footer/>
+                <Footer />
             </>
         );
     }

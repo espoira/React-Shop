@@ -749,7 +749,7 @@ ul li span {
 
 .filters {
   width: 270px;
-  height: 2950px;
+  height: 3000px;
   margin-left: 10px;
   float: left;
 }
@@ -831,16 +831,41 @@ label span {
 }
 
 #sorting {
-    margin-top: -135px;
-    margin-right: 260px;
-    float: right;
-    cursor: pointer;
+  margin-top: -135px;
+  margin-right: 260px;
+  float: right;
+  cursor: pointer;
 }
 
 select {
-    margin-top: -133px;
-    margin-right: 80px;
-    float: right;
+  margin-top: -133px;
+  margin-right: 80px;
+  float: right;
+}
+
+.pages {
+  width: 68%;
+  padding: 60px 35px 78px 50px;
+  display: inline-block;
+  text-align: center;
+  clear: right;
+}
+
+.pages a {
+  padding: 9px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 130%;
+  color: #3F4E65;
+  border-radius: 1000px;
+}
+
+.pages a:first-child {
+    background: linear-gradient(90deg, rgba(255, 198, 80, 0.3) 0%, rgba(254, 202, 110, 0.3) 97.25%);
+}
+
+.pages a:hover {
+  color: darkmagenta;
 }
 
 .product-info {

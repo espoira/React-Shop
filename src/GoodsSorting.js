@@ -1,50 +1,79 @@
 import React from 'react';
 import {ProductItem} from "./ProductItem";
+import {NameSorting} from "./NameSorting";
 
-function GoodsSorting (props) {
-    const {
-        goods,
-        filter,
-        flagFilter,
-        sortingFlag,
-        sortedNames,
-        showSorted = Function.prototype,
-        addToCart = Function.prototype,
-        showProduct = Function.prototype,
-    } = props;
+class GoodsSorting extends React.Component {
+    constructor(props){
+        super();
+        this.state = {
+            value: 'empty',
+        };
+        this.handleChange = this.handleChange.bind(this);
+    };
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
 
 
-    return (
-        <>
-            <span id="sorting" onClick={() => showSorted()}><b>Сортировка:</b></span>
+    render() {
 
-            <select>
-                <option onChange={() => showSorted()} value="by-name">По названию (А - Я)</option>
-                <option onChange={() => showSorted()} value="by-name-reverse">По названию (Я - А)</option>
-            </select>
+        const {value} = this.state;
 
-            {sortingFlag && !flagFilter && !filter ? (
+        const {
+            goods,
+            flagFilter,
+            checkFilter,
+            sortedNames,
+            sortingFlag,
+            showSorted = Function.prototype,
+            addToCart = Function.prototype,
+            showProduct = Function.prototype,
+        } = this.props;
 
-                sortedNames.sort().map((goodName) => {
 
-                    return goods.map((good) => {
-                        if (good.name === goodName) {
-                            return (
+        return (
 
-                                <ProductItem key={good.id} {...good} addToCart={addToCart} showProduct={showProduct}/>
+            <>
+                <span id="sorting"><b>Сортировка:</b></span>
 
-                            )
-                        }
-                    })
+                <select value={this.state.value} onChange={this.handleChange}
+                        onClick={() => showSorted()}>
+                    <option value="empty">Выбрать вариант</option>
+                    <option value="by-name">По названию (А - Я)</option>
+                    <option value="by-name-reverse">По названию (Я - А)</option>
+                </select>
 
-                })
+                {sortingFlag && !flagFilter && !checkFilter ? (
 
-            ) : (
-                null
-            )}
+                    value == 'empty' ? (
 
-        </>
-    );
+                        goods.map((good) => {
+                            if (sortedNames.includes(good.name)) {
+                                return (
+
+                                    <ProductItem key={good.id} {...good} addToCart={addToCart}
+                                                 showProduct={showProduct}/>
+
+                                )
+                            }
+                        })
+
+                    ) : (
+
+                        <NameSorting goods={goods} sortedNames={sortedNames} value={value}
+                                     addToCart={addToCart} showProduct={showProduct}/>
+
+                    )) : (
+                        null
+                )}
+
+
+            </>
+        );
+
+    }
+
 }
 
 export {GoodsSorting};

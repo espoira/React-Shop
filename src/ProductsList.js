@@ -3,6 +3,7 @@ import { TypeFilter } from './TypeFilter';
 import { ProductItem } from './ProductItem';
 import {GoodsSorting} from "./GoodsSorting";
 
+
 function ProductsList(props) {
     const {
         goods,
@@ -10,6 +11,7 @@ function ProductsList(props) {
         target,
         company,
         sortedNames,
+        showPage = Function.prototype,
         addToCart = Function.prototype,
         goBack = Function.prototype,
         clearFilters = Function.prototype,
@@ -18,8 +20,8 @@ function ProductsList(props) {
         showProduct = Function.prototype,
         showSorted = Function.prototype,
         sortingFlag,
+        checkFilter,
         flagFilter,
-        filter,
         flag,
         page,
     } = props;
@@ -29,6 +31,7 @@ function ProductsList(props) {
     }
 
     let k = 0;
+    const numbers = [1, 2, 3, 4, 5];
 
     let shopContent = flag ? (
 
@@ -47,8 +50,9 @@ function ProductsList(props) {
             <TypeFilter goods={goods} category={category} showFilter={showFilter} showCompany={showCompany} />
 
 
-            <GoodsSorting goods={goods} sortingFlag={sortingFlag} flagFilter={flagFilter} filter={filter}
-                          showSorted={showSorted} sortedNames={sortedNames} />
+            <GoodsSorting goods={goods} flagFilter={flagFilter} checkFilter={checkFilter}
+                          sortingFlag={sortingFlag} showSorted={showSorted} sortedNames={sortedNames}
+                          addToCart={addToCart} showProduct={showProduct} />
 
         </div>
     );
@@ -60,44 +64,79 @@ function ProductsList(props) {
 
 
             {goods.map((item) => {
-                if (!flag && item.category === category && k >= 15 * (page - 1) && k < 15 * page
-                    && !sortingFlag && !flagFilter && !filter) {
+                if (!flag && item.category === category) {
 
+                    // все товары по категории на её странице с номером "page"
+                    if (k >= 15 * (page - 1) && k < 15 * page && !sortingFlag && !flagFilter && !checkFilter) {
+
+                        return (
+
+                            <div key={item.id} className="products-list">
+                                <ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart}
+                                             showProduct={showProduct}/>
+                            </div>
+
+                        )
+
+                    }
+
+                    // фильтрация по назначению товара
+                    if (flagFilter && item.target === target) {
+
+                        return (<ProductItem key={item.id} {...item} flag={flag}
+                                             addToCart={addToCart} showProduct={showProduct} />)
+
+                    }
+
+                    // фильтрация по производителю
+                    if (checkFilter && item.company === company) {
+
+                        return (<ProductItem key={item.id} {...item} flag={flag}
+                                             addToCart={addToCart} showProduct={showProduct} />)
+
+                    }
+
+                    // заполнение массива названиями товаров для их последующей сортировки
                     if (!sortedNames.includes(item.name)) {
                         sortedNames.push(item.name);
                     }
 
                     k++;
 
-                    return (
-
-                        <div key={item.id} className="products-list">
-                            <ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />
-                        </div>
-
-                    )
-
                 }
 
+                // произвольная подборка товаров на главной странице
                 if (flag && item.id % 7 === 0) {
 
-                    return (<ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />)
+                    return (<ProductItem key={item.id} {...item} flag={flag}
+                                         addToCart={addToCart} showProduct={showProduct} />)
 
                 }
 
-                if (flagFilter && item.target === target && item.category === category) {
-
-                    return (<ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />)
-
-                }
-
-                if (filter && item.company === company && item.category === category) {
-
-                    return (<ProductItem key={item.id} {...item} flag={flag} addToCart={addToCart} showProduct={showProduct} />)
-
-                }
 
             })}
+
+
+            {!flag ? (
+
+                <div className="pages">
+
+                    {numbers.map((number) => {
+
+                        return (
+                            <a id={`link-${number}`} className="pageNumber" onClick={() => showPage(number)}>
+                                {number}
+                            </a>
+                        )
+
+                    })}
+
+                </div>
+
+            ) : (
+                null
+            )}
+
 
         </div>
     );

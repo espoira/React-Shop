@@ -15,7 +15,7 @@ class Shop extends React.Component {
             flagFilter: false,
             target: '',
             company: '',
-            filter: false,
+            checkFilter: false,
             sortingFlag: false,
             sortedNames: [],
             pageNumber: 1,
@@ -29,17 +29,29 @@ class Shop extends React.Component {
     showFilter = (type) => {
         this.setState({flagFilter: true});
         this.setState ({target: type});
+        this.setState({sortingFlag: false});
     };
 
     showCompany = (item) => {
-        this.setState({filter: !this.state.filter});
+        this.setState({checkFilter: !this.state.checkFilter});
         this.setState({company: item.company});
+        this.setState({sortingFlag: false});
     };
 
     clearFilters = () => {
         this.setState({flagFilter: false});
-        this.setState ({filter: false});
+        this.setState ({checkFilter: false});
         this.setState({sortingFlag: false});
+    };
+
+    showPage = (number) => {
+        window.scrollTo(0, 198);
+        [1,2,3,4,5].map((number) => {
+            document.getElementById(`link-${number}`).style.background = 'none';
+        });
+        document.getElementById(`link-${number}`).style.background =
+            'linear-gradient(90deg, rgba(255, 198, 80, 0.3) 0%, rgba(254, 202, 110, 0.3) 97.25%)';
+        this.setState({pageNumber: number});
     };
 
 
@@ -51,7 +63,9 @@ class Shop extends React.Component {
 
 
     render() {
-        const {category, popular, flagFilter, target, company, filter, sortingFlag, sortedNames, pageNumber} = this.state;
+        const {category, popular, pageNumber, sortedNames, sortingFlag,
+               target, company, flagFilter, checkFilter} = this.state;
+
         const {flagProduct, goodId, addToCart = Function.prototype, goBack = Function.prototype,
                showProduct = Function.prototype, showCategory = Function.prototype} = this.props;
 
@@ -65,14 +79,16 @@ class Shop extends React.Component {
                             flag={popular}
                             category={category}
                             goods={products}
+
                             page={pageNumber}
+                            showPage={this.showPage}
 
                             target={target}
                             flagFilter={flagFilter}
                             showFilter={this.showFilter}
 
                             company={company}
-                            filter={filter}
+                            checkFilter={checkFilter}
                             showCompany={this.showCompany}
 
                             sortedNames={sortedNames}
@@ -89,7 +105,8 @@ class Shop extends React.Component {
 
                 ) : (
 
-                    <ProductInfo goods={products} goodId={goodId} showCategory={showCategory} addToCart={addToCart} goBack={goBack}/>
+                    <ProductInfo goods={products} goodId={goodId} showCategory={showCategory}
+                                 addToCart={addToCart} goBack={goBack}/>
 
                 )}
             </>
